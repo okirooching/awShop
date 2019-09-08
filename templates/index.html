@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>anyWherething</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> 
+    <script src="{% static 'js/myTrial3.js' %}" async></script>
+</head>
+<body class="row">
+    <header>
+            <div class="row">
+                <a class="col-3" href="/"><img src="{% static 'img/logo.png' %}"></a>
+
+                <form method="POST" action="/" class="col-7">
+
+                    {% csrf_token %}
+                    <input type="search" name="searchItem" placeholder="Itisha utakacho hapa..">
+
+                </form>
+                <button class="col-2" id="show_cart_btn">order</button>
+            </div>
+    </header>
+    <div class="row">
+
+
+            <div  class="row" id="productArea">
+                {% for product in products %}
+                    <div id="productItem"  class="productItem col-4">
+                        <img src="{{ product.productitemimage.url }}">
+                        <!-- productName 16char max -->
+                        <p class="productName" name="ironMan">{{product.productitemname}}</p> 
+                        <div class="productPrice" name="spiderMan">Ksh.{{product.productitemprice }}</div>
+                        <button type="button" class="btn btn-danger" style="margin: 3px; color: white; font-size: 10px;">Download</button>
+                    </div>
+                {% endfor %}
+            </div>
+            <p id="searchResult" style="margin-top: 50px;">{{ message }}</p>
+            <div  class="row" id="productArea">
+                {% for myproduct in allMyProducts %} 
+                    <div id="productItem"  class="productItem col-4">
+                        <img src="{{ myproduct.productitemimage.url }}">
+                        <!-- productName 16char max -->
+                        <p class="productName" name="ironMan" style="border: none;">{{myproduct.productitemname}}</p> 
+                        <div class="productPrice" name="spiderMan" style="width:30px; border:none;">Ksh.{{myproduct.productitemprice }}</div>
+                        <button type="buttton" class="btn btn-danger" style="margin: 3px; color: white; font-size: 10px;">Download</button>
+                    </div>
+                {% endfor %}
+            </div>
+            
+
+
+
+
+            <div id="theCart">
+                <div id="cartNav">
+                    <h4>Item</h4>
+                    <h4>Qty</h4>
+                    <h4>Price</h4>
+                    <h4><button  id="hide_cart"type="buttton" class="btn btn-danger">shop more</button></h4>
+                </div>
+                <br>
+                <table>
+                    <tbody>
+                    </tbody>
+                </table>
+                <br>
+                <form method="POST" action="/addOrder/">
+
+                    {% csrf_token %}
+                        <input  id="show_total" type="submit" class="btn btn-danger" value=""></button>
+                        <input style ="visibility: hidden;" name="orderText" id="orderString" value="">
+
+                        <input style ="visibility: hidden;" name="userLongitude" id="userLongitude" value="">
+                        <input style ="visibility: hidden;" name="userLatitude" id="userLatitude" value="">
+                </form>
+                <p>"transport ni 50/= pekee!"</p>
+            </div>
+        </div>
+</body>
+</html>
+    
+
