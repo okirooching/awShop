@@ -76,11 +76,11 @@ WSGI_APPLICATION = 'awShop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'finalDatabase',
-        'USER':'postgres',
-        'PASSWORD':'0987',
-        'HOST':'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'sqlite3.db',
+        'USER':'',
+        'PASSWORD':'',
+        'HOST':'',
     }
 }
 
